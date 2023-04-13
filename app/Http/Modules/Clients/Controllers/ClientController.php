@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Modules\Users\Controllers;
+namespace App\Http\Modules\Clients\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Modules\Bases\PaginateBaseRequest;

@@ -29,7 +29,7 @@ class ClientRepository extends RepositoryBase
             ->select('id', 'name', 'last_name', 'email', 'phone', 'document_number', 'type', 'address', 'document_type_id', 'city_id')
             ->selectRaw('CONCAT(name, " ", last_name) as full_name')
             ->selectRaw('CASE WHEN type = "natural" THEN "Persona Natural" ELSE "Persona Jurídica" END as type')
-            ->with(['document_type:id,name', 'city' => function ($query) {
+            ->with(['document_type:id,name,code', 'city' => function ($query) {
                 $query->select('id', 'name')
                     ->with(['department' => function ($query) {
                         $query->select('id', 'name');
@@ -41,6 +41,7 @@ class ClientRepository extends RepositoryBase
             ->orWhere('phone', 'like', "%$search%")
             ->orWhere('document_number', 'like', "%$search%")
             ->orWhere('type', 'like', "%$search%")
+            ->orderBy('id', 'desc')
             ->paginate($limit);
     }
 

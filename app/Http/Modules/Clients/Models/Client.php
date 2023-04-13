@@ -6,6 +6,8 @@
 
 namespace App\Http\Modules\Clients\Models;
 
+use App\Http\Modules\Cities\Models\City;
+use App\Http\Modules\DocumentTypes\Models\DocumentType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 

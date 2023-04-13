@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
                 DocumentTypeSeeder::class,
                 UserSeeder::class,
                 CountrySeeder::class,
-                DepartmentSeeder::class
+                DepartmentSeeder::class,
+                CategoryServiceSeeder::class,
             ]
         );
         Artisan::call('jwt:secret');
