@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Http\Modules\Services\Models\CategoryService;
+use App\Http\Modules\Services\Models\Service;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -144,9 +145,10 @@ class CategoryServiceSeeder extends Seeder
             ]);
 
             foreach ($category['services'] as $service) {
-                $categoryService->services()->create([
+                Service::create([
                     'name' => $service['name'],
-                    'description' => $service['description']
+                    'description' => $service['description'],
+                    'category_service_id' => $categoryService->id
                 ]);
             }
         }
