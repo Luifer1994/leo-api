@@ -3,6 +3,7 @@
 namespace App\Http\Modules\Users\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Modules\Bases\PaginateBaseRequest;
 use App\Http\Modules\Users\Repositories\UserRepository;
 use App\Http\Modules\Users\Requests\ChangePasswordRequest;
 use App\Http\Modules\Users\Requests\CreateUserRequest;
@@ -30,16 +31,38 @@ class UserController extends Controller
      * @return JsonResponse
      * @author Luifer Almendrales
      */
-    public function index(Request $request): JsonResponse
+    public function index(PaginateBaseRequest $request): JsonResponse
     {
-
         try {
-            $users = $this->userRepository->getAllUsers($request->all());
+            $limit  = $request->limit ?? 10;
+            $search = $request->search ?? '';
+            $users = $this->userRepository->getAllUsers($limit, $search);
             return $this->successResponse($users, 'Usuarios listados con exito!');
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage(), Response::HTTP_BAD_REQUEST);
         }
     }
+
+    /**
+     * Get user by id.
+     *
+     * @param  int $id
+     * @return JsonResponse
+     * @author Luifer Almendrales
+     */
+    public function show(int $id): JsonResponse
+    {
+        try {
+            $user = $this->userRepository->getById($id);
+            if (!$user) {
+                return $this->errorResponse('¡El usuario no existe!', Response::HTTP_NOT_FOUND);
+            }
+            return $this->successResponse($user, 'Usuario listado con exito!');
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
+    }
+
 
     /**
      * Create a new user.

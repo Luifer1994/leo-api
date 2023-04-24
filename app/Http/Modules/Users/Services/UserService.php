@@ -83,7 +83,7 @@ class UserService
             return [
                 'res'     => true,
                 'message' => 'Usuario actualizado correctamente',
-                'code'    => Response::HTTP_OK,
+                'code'    => Response::HTTP_CREATED,
                 'data'    => $user
             ];
         } else {

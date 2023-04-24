@@ -37,7 +37,7 @@ class UpdateUserRequest extends FormRequest
             'address'          => 'nullable|string:max:255',
             'email'            => 'required|email|unique:users,email,' . $this->id . ',id',
             'gender'           => 'required|string|in:Femenino,Masculino',
-            'password'         => 'required|string|min:8',
+            'password'         => 'nullable|string|min:8',
             'role'             => 'required|exists:roles,name',
         ];
     }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('gender', ['Masculino', 'Femenino'])->comment('Gender of the user');
             $table->string('phone', 15)->nullable()->comment('Phone of the user');
             $table->string('cell_phone', 15)->nullable()->comment('Cell phone of the user');
-            $table->string('address')->nullable()->comment('Address of the user');
+            /* $table->string('address')->nullable()->comment('Address of the user'); */
             $table->foreignId('document_type_id')->constrained('document_types')->comment('Document type of the user');
             $table->string('document',20)->comment('Document of the user');
             $table->string('email')->unique()->comment('Email of the user');

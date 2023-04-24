@@ -20,23 +20,37 @@ class UserRepository extends RepositoryBase
     /**
      * Get all users
      *
-     * @param  Object $request
+     * @param  int $limit
+     * @param  string $search
      * @return Object
      * @author Luifer Almendrales
      */
-    public function getAllUsers(array $request): Object
+    public function getAllUsers(int $limit, string $search): Object
     {
-        return $this->userModel->select([
-            'users.id', 'users.name', 'users.last_name', 'users.email',
-            'users.is_active', 'users.document', 'users.phone', 'users.cell_phone',
-            'users.gender', 'users.address'
-        ])
-            ->when(isset($request['searchQuery']), function ($filter) use ($request) {
-                $filter->where('users.name', 'like', '%' . $request['searchQuery'] . '%')
-                    ->orWhere('users.document', 'like', '%' . $request['searchQuery'] . '%')
-                    ->orWhere('users.email', 'like', '%' . $request['searchQuery'] . '%');
+        return $this->userModel->select('id', 'name', 'last_name', 'email', 'is_active', 'document', 'phone', 'cell_phone','gender', 'document_type_id')
+            ->selectRaw('CONCAT(name, " ", last_name) as full_name')
+            ->when(isset($search), function ($filter) use ($search) {
+                $filter->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('last_name', 'like', '%' . $search . '%')
+                    ->orWhere('document', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%');
             })
-            ->orderBy('users.created_at', 'desc')
-            ->paginate(5);
+            ->with(['document_type:id,name,code'])
+            ->orderBy('created_at', 'desc')
+            ->paginate($limit);
+    }
+
+    /**
+     * Get user by id
+     *
+     * @param  int $id
+     * @return Object|null
+     */
+    public function getById(int $id): ?Object
+    {
+        return $this->userModel->select('id', 'name', 'last_name', 'email', 'is_active', 'document', 'phone', 'cell_phone','gender', 'document_type_id')
+            ->selectRaw('CONCAT(name, " ", last_name) as full_name')
+            ->with(['document_type:id,name,code', 'roles:id,name,description'])
+            ->find($id);
     }
 }
