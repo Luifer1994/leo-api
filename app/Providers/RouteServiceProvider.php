@@ -38,6 +38,7 @@ class RouteServiceProvider extends ServiceProvider
                 $this->loadRoutesFrom(base_path('routes/Clients/ClientRoutes.php'));
                 $this->loadRoutesFrom(base_path('routes/Cities/CityRoutes.php'));
                 $this->loadRoutesFrom(base_path('routes/DocumentTypes/DocumentTypeRoutes.php'));
+                $this->loadRoutesFrom(base_path('routes/Services/ServiceRoutes.php'));
             });
 
         Route::middleware('web')

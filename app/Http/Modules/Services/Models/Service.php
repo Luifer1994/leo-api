@@ -8,6 +8,8 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use \OwenIt\Auditing\Auditable;
 
 /**
  * Class Service
@@ -25,8 +27,9 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Service extends Model
+class Service extends Model implements AuditableContract
 {
+    use Auditable;
 	protected $table = 'services';
 
 	protected $casts = [

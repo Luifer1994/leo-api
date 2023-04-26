@@ -5,7 +5,6 @@ namespace App\Http\Modules\Users\Repositories;
 use App\Http\Modules\Bases\RepositoryBase;
 use App\Http\Modules\Users\Models\User;
 
-use function PHPSTORM_META\map;
 
 class UserRepository extends RepositoryBase
 {
