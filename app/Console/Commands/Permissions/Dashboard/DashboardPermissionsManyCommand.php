@@ -20,7 +20,7 @@ class DashboardPermissionsManyCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Createa all permissions for users module';
+    protected $description = 'Createa all permissions for dashboard module';
 
     /**
      * Execute the console command.

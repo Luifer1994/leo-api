@@ -37,6 +37,7 @@ class CreatePermissionsManyCommand extends Command
             $this->call('create-permission-cities');
             $this->call('create-permission-document-types');
             $this->call('create-permission-services');
+            $this->call('create-permission-categories');
         } catch (\Throwable $th) {
             $this->error($th->getMessage());
         }

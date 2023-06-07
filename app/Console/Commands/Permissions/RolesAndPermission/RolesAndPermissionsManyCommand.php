@@ -20,7 +20,7 @@ class RolesAndPermissionsManyCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Createa all permissions for users module';
+    protected $description = 'Createa all permissions for roles and permissions module';
 
     /**
      * Execute the console command.
@@ -29,7 +29,7 @@ class RolesAndPermissionsManyCommand extends Command
      */
     public function handle()
     {
-        $this->line('Creando permisos de panel de control...');
+        $this->line('Creando permisos de roles y permisos...');
         try {
             $permisions = [
                 [

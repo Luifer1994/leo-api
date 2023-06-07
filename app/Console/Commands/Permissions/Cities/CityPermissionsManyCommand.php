@@ -29,7 +29,7 @@ class CityPermissionsManyCommand extends Command
      */
     public function handle()
     {
-        $this->line('Creando permisos de clientes...');
+        $this->line('Creando permisos de ciudades...');
         try {
             $permisions = [
                 [

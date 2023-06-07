@@ -27,12 +27,14 @@ class ServiceRepository extends RepositoryBase
     {
         return $this->modelService
             ->select('id', 'name', 'description', 'price', 'category_service_id')
-            ->with(['category_service' => function ($query) use ($search) {
-                $query->select('id', 'name')
-                    ->where('name', 'like', "%$search%");
+            ->with(['CategoryService' => function ($query) {
+                $query->select('id', 'name');
             }])
             ->where('name', 'like', "%$search%")
             ->orWhere('description', 'like', "%$search%")
+            ->orWhereHas('CategoryService', function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%");
+            })
             ->orderBy('id', 'desc')
             ->paginate($limit);
     }
@@ -47,7 +49,7 @@ class ServiceRepository extends RepositoryBase
     {
         return $this->modelService
             ->select('id', 'name', 'description', 'price', 'category_service_id')
-            ->with(['categoryService' => function ($query) {
+            ->with(['CategoryService' => function ($query) {
                 $query->select('id', 'name');
             }])
             ->where('id', $id)

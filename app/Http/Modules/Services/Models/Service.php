@@ -46,7 +46,7 @@ class Service extends Model implements AuditableContract
 		'category_service_id'
 	];
 
-	public function category_service()
+	public function CategoryService()
 	{
 		return $this->belongsTo(CategoryService::class);
 	}
