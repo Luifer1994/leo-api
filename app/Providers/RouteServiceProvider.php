@@ -39,7 +39,6 @@ class RouteServiceProvider extends ServiceProvider
                 $this->loadRoutesFrom(base_path('routes/Cities/CityRoutes.php'));
                 $this->loadRoutesFrom(base_path('routes/DocumentTypes/DocumentTypeRoutes.php'));
                 $this->loadRoutesFrom(base_path('routes/Services/ServiceRoutes.php'));
-                $this->loadRoutesFrom(base_path('routes/Categories/CategoryRoutes.php'));
                 $this->loadRoutesFrom(base_path('routes/Products/ProductRoutes.php'));
             });
 

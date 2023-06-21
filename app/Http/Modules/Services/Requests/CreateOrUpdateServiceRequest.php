@@ -5,7 +5,6 @@ namespace App\Http\Modules\Services\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Support\Facades\Auth;
 
 class CreateOrUpdateServiceRequest extends FormRequest
 {
@@ -29,8 +28,6 @@ class CreateOrUpdateServiceRequest extends FormRequest
         return [
             'name'                  => 'required|string:max:100',
             'description'           => 'nullable|string:max:255',
-            'price'                 => 'nullable|numeric',
-            'category_service_id'   => 'required|exists:category_services,id',
         ];
     }
 
@@ -47,9 +44,6 @@ class CreateOrUpdateServiceRequest extends FormRequest
             'name.max'                      => 'El nombre debe tener máximo 100 caracteres',
             'description.string'            => 'La descripción debe ser una cadena de caracteres',
             'description.max'               => 'La descripción debe tener máximo 255 caracteres',
-            'price.numeric'                 => 'El precio debe ser un número',
-            'category_service_id.required'  => 'La categoría es requerida',
-            'category_service_id.exists'    => 'La categoría no existe',
         ];
     }
 

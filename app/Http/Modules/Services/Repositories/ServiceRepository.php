@@ -26,15 +26,9 @@ class ServiceRepository extends RepositoryBase
     public function getAllServices(int $limit, string $search): object
     {
         return $this->modelService
-            ->select('id', 'name', 'description', 'price', 'category_service_id')
-            ->with(['CategoryService' => function ($query) {
-                $query->select('id', 'name');
-            }])
+            ->select('id', 'name', 'description', 'is_active')
             ->where('name', 'like', "%$search%")
             ->orWhere('description', 'like', "%$search%")
-            ->orWhereHas('CategoryService', function ($query) use ($search) {
-                $query->where('name', 'like', "%$search%");
-            })
             ->orderBy('id', 'desc')
             ->paginate($limit);
     }
@@ -48,11 +42,8 @@ class ServiceRepository extends RepositoryBase
     public function findById(int $id): ?Service
     {
         return $this->modelService
-            ->select('id', 'name', 'description', 'price', 'category_service_id')
-            ->with(['CategoryService' => function ($query) {
-                $query->select('id', 'name');
-            }])
-            ->where('id', $id)
+            ->select('id', 'name', 'description', 'is_active')
+            ->where(['id' => $id])
             ->first();
     }
 }

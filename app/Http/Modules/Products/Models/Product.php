@@ -34,20 +34,11 @@ class Product extends Model implements AuditableContract
 
 	protected $casts = [
 		'is_active' => 'bool',
-		'price' => 'float',
-		'category_product_id' => 'int'
 	];
 
 	protected $fillable = [
 		'name',
 		'is_active',
 		'description',
-		'price',
-		'category_product_id'
 	];
-
-	public function CategoryProduct()
-	{
-		return $this->belongsTo(CategoryProduct::class);
-	}
 }

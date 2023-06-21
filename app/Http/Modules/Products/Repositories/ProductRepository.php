@@ -26,15 +26,9 @@ class ProductRepository extends RepositoryBase
     public function getAllProducts(int $limit, string $search): object
     {
         return $this->modelProduct
-            ->select('id', 'name', 'description', 'price', 'category_Product_id')
-            ->with(['CategoryProduct' => function ($query) {
-                $query->select('id', 'name');
-            }])
+            ->select('id', 'name', 'description', 'is_active')
             ->where('name', 'like', "%$search%")
             ->orWhere('description', 'like', "%$search%")
-            ->orWhereHas('CategoryProduct', function ($query) use ($search) {
-                $query->where('name', 'like', "%$search%");
-            })
             ->orderBy('id', 'desc')
             ->paginate($limit);
     }
@@ -48,10 +42,7 @@ class ProductRepository extends RepositoryBase
     public function findById(int $id): ?Product
     {
         return $this->modelProduct
-            ->select('id', 'name', 'description', 'price', 'category_Product_id')
-            ->with(['CategoryProduct' => function ($query) {
-                $query->select('id', 'name');
-            }])
+            ->select('id', 'name', 'description', 'is_active' )
             ->where('id', $id)
             ->first();
     }

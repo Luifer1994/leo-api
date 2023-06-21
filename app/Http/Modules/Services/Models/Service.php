@@ -19,7 +19,6 @@ use \OwenIt\Auditing\Auditable;
  * @property bool $is_active
  * @property string|null $description
  * @property float $price
- * @property int $category_service_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
@@ -34,20 +33,11 @@ class Service extends Model implements AuditableContract
 
 	protected $casts = [
 		'is_active' => 'bool',
-		'price' => 'float',
-		'category_service_id' => 'int'
 	];
 
 	protected $fillable = [
 		'name',
 		'is_active',
-		'description',
-		'price',
-		'category_service_id'
+		'description'
 	];
-
-	public function CategoryService()
-	{
-		return $this->belongsTo(CategoryService::class);
-	}
 }
