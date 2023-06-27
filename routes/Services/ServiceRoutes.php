@@ -16,6 +16,7 @@ Route::prefix('services')->group(function () {
             Route::get('show/{id}', 'show')->middleware('permission:services-show');
             Route::post('create', 'store')->middleware('permission:services-create');
             Route::put('update/{id}', 'update')->middleware('permission:services-update');
+            Route::get('list-is-active', 'getAllServicesIsActive')->middleware('permission:services-list-is-active');
         });
     });
 });

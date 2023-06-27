@@ -39,6 +39,23 @@ class ServiceController extends Controller
     }
 
     /**
+     * Get all services is active.
+     *
+     * @param  PaginateBaseRequest $request
+     * @return JsonResponse
+     */
+    public function getAllServicesIsActive(PaginateBaseRequest $request): JsonResponse
+    {
+        try {
+            $search   = $request->search ?? '';
+            $services = $this->serviceRepository->getAllServicesIsActive($search);
+            return $this->successResponse($services, Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
      * Get service by id.
      *
      * @param  int $id

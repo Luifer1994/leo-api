@@ -34,6 +34,24 @@ class ServiceRepository extends RepositoryBase
     }
 
     /**
+     * Get all services is active.
+     *
+     * @param  string $search
+     * @return object
+     */
+    public function getAllServicesIsActive(string $search): object
+    {
+        return $this->modelService
+            ->select('id', 'name', 'description', 'is_active')
+            ->where('is_active', true)
+            ->where('name', 'like', "%$search%")
+            ->orWhere('description', 'like', "%$search%")
+            ->orderBy('id', 'desc')
+            ->limit(5)
+            ->get();
+    }
+
+    /**
      * Find a service by id.
      *
      * @param  int $id

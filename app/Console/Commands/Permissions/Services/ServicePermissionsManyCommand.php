@@ -61,7 +61,12 @@ class ServicePermissionsManyCommand extends Command
                     "name"        => 'services-update',
                     "description" => 'Actualizar servicios',
                     "group"       => 'Servicios',
-                ]
+                ],
+                [
+                    "name"        => 'services-list-is-active',
+                    "description" => 'Listar servicios activos',
+                    "group"       => 'Servicios',
+                ],
             ];
             $role        = Role::where('name', 'admin')->first();
             foreach ($permisions as  $value) {
@@ -72,6 +77,5 @@ class ServicePermissionsManyCommand extends Command
         } catch (\Throwable $th) {
             $this->error($th->getMessage());
         }
-
     }
 }
