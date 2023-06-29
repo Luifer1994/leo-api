@@ -29,8 +29,6 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property City $city
  * @property DocumentType $document_type
- *
- * @package App\Models
  */
 class Client extends Model
 {

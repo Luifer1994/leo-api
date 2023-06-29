@@ -21,10 +21,6 @@ use \OwenIt\Auditing\Auditable;
  * @property float $price
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
- * @property CategoryService $category_service
- *
- * @package App\Models
  */
 class Service extends Model implements AuditableContract
 {

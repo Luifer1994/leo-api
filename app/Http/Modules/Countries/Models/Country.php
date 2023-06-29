@@ -15,8 +15,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon|null $updated_at
  *
  * @property Collection|Department[] $departments
- *
- * @package App\Models
  */
 class Country extends Model
 {

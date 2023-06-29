@@ -18,8 +18,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon $changed_at
  *
  * @property Collection|User[] $users
- *
- * @package App\Models
  */
 class DocumentType extends Model
 {
@@ -38,7 +36,7 @@ class DocumentType extends Model
     ];
 
     /**
-     * Relationship with users
+     * Relationship with users.
      *
      * @return HasMany
      */

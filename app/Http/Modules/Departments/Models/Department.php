@@ -20,8 +20,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property Country $country
  * @property Collection|City[] $cities
- *
- * @package App\Models
  */
 class Department extends Model
 {

@@ -17,8 +17,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon|null $updated_at
  *
  * @property Department $department
- *
- * @package App\Models
  */
 class City extends Model
 {

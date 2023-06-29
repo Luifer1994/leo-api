@@ -35,8 +35,6 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon $changed_at
  *
  * @property DocumentType $document_type
- *
- * @package App\Models
  */
 class User extends Authenticatable implements JWTSubject, AuditableContract
 {
