@@ -23,7 +23,7 @@ class PermissionController extends Controller
     /**
      * Funtion to get groups the permissions by group.
      *
-     * @param string $group
+     * @param PaginateBaseRequest $request
      * @return JsonResponse
      */
     public function getGroupPermissionsByGroup(PaginateBaseRequest $request): JsonResponse

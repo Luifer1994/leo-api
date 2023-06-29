@@ -64,7 +64,7 @@ class ClientController extends Controller
     /**
      * Create a new clent.
      *
-     * @param  Request $request
+     * @param  CreateClientRequest $request
      * @return JsonResponse
      * @author Luifer Almendrales
      */
@@ -82,7 +82,7 @@ class ClientController extends Controller
     /**
      * Update a client.
      *
-     * @param  Request $request
+     * @param  UpdateClientRequest $request
      * @return JsonResponse
      */
     public function update(UpdateClientRequest $request, $id): JsonResponse

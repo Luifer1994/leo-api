@@ -21,7 +21,9 @@ class RoleService
     /**
      * Funtion to asing permissions to a role.
      *
-     * @param Request $request
+     * @param int $role_id
+     * @param array $permissions_ids
+     * @param string $group
      * @return object
      */
     public function asingPermissionsToRole(int $role_id, array $permissions_ids, string $group): object

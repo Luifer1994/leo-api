@@ -25,9 +25,9 @@ class ServicePermissionsManyCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return int
+     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $this->line('Creando permisos de servicios...');
         try {

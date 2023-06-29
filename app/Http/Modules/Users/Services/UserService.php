@@ -58,7 +58,7 @@ class UserService
     /**
      * Update a user
      *
-     * @param  Object $request
+     * @param  UpdateUserRequest $request
      * @param  int $id
      * @return Array
      * @author Luifer Almendrales

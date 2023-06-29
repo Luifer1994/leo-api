@@ -12,7 +12,7 @@ trait ApiResponse
      * Success response
      *
      * @param mixed $data
-     * @param string|null $message
+     * @param string $message
      * @param integer $code
      * @return JsonResponse
      */

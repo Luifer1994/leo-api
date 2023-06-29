@@ -20,7 +20,7 @@ class CityController extends Controller
     /**
      * Get all document types.
      *
-     * @param  Request $request
+     * @param  PaginateBaseRequest $request
      * @return JsonResponse
      * @author Luifer Almendrales
      */

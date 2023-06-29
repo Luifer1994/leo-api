@@ -22,14 +22,14 @@ class PermissionService
     /**
      * Funtion to return al permissions in group by group and mark the permissions that the role has.
      *
-     * @param Request $request
+     * @param int $role_id
      * @return object
      */
     public function getAllPermissionsInGroupByGroup(int $role_id): object
     {
         try {
             $permissions = $this->PermissionRepository->getAllPermissionsInGroupByGroup($role_id);
-            $role        = $this->RoleRepository->find($role_id);
+            $role        = $this->RoleRepository->getById($role_id);
 
             foreach ($permissions as $group => $permission) {
                 foreach ($permission as $key => $value) {

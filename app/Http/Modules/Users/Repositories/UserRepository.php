@@ -28,7 +28,7 @@ class UserRepository extends RepositoryBase
     {
         return $this->userModel->select('id', 'name', 'last_name', 'email', 'is_active', 'document', 'phone', 'cell_phone','gender', 'document_type_id')
             ->selectRaw('CONCAT(name, " ", last_name) as full_name')
-            ->when(isset($search), function ($filter) use ($search) {
+            ->when($search, function ($filter) use ($search) {
                 $filter->where('name', 'like', '%' . $search . '%')
                     ->orWhere('last_name', 'like', '%' . $search . '%')
                     ->orWhere('document', 'like', '%' . $search . '%')

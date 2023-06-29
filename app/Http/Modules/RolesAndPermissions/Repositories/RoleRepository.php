@@ -16,9 +16,9 @@ class RoleRepository
     /**
      * Funtion to get all roles.
      *
-     * @return Collection
+     * @return Object
      */
-    public function getAll()
+    public function getAll(): Object
     {
         return $this->model->select('id', 'name', 'description')
             ->withCount('permissions')
@@ -29,9 +29,9 @@ class RoleRepository
      * Funtion to get a role by id.
      *
      * @param int $id
-     * @return Collection
+     * @return Object
      */
-    public function getById(int $id)
+    public function getById(int $id): Object
     {
         return $this->model->select('id', 'name', 'description', 'guard_name')->findOrFail($id);
     }
@@ -39,7 +39,7 @@ class RoleRepository
     /**
      * Funtion to get a roles by names.
      *
-     * @param int $id
+     * @param string $name
      * @return collection
      */
     public function getRolesByNames(string $name): Collection
@@ -53,8 +53,9 @@ class RoleRepository
      * Funtion created new role.
      *
      * @param array $data
+     * @return Object
      */
-    public function create(array $data)
+    public function create(array $data): Object
     {
         return $this->model->create($data);
     }
@@ -63,9 +64,9 @@ class RoleRepository
      * Funtion to update a role.
      *
      * @param array $data
-     * @param int $id
+     * @return Bool
      */
-    public function update(array $data)
+    public function update(array $data): Bool
     {
         return $this->model->update($data);
     }

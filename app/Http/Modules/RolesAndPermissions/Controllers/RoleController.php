@@ -76,6 +76,7 @@ class RoleController extends Controller
      * Find created new role.
      *
      * @param CreateRoleRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(CreateRoleRequest $request): JsonResponse
     {
@@ -90,8 +91,9 @@ class RoleController extends Controller
     /**
      * Function update role.
      *
-     * @param CreateRoleRequest $request
+     * @param UpdateRoleRequest $request
      * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateRoleRequest $request, int $id): JsonResponse
     {

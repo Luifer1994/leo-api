@@ -27,7 +27,7 @@ class UserController extends Controller
     /**
      * Get all users.
      *
-     * @param  Request $request
+     * @param  PaginateBaseRequest $request
      * @return JsonResponse
      * @author Luifer Almendrales
      */
@@ -67,7 +67,7 @@ class UserController extends Controller
     /**
      * Create a new user.
      *
-     * @param  Request $request
+     * @param  CreateUserRequest $request
      * @return JsonResponse
      * @author Luifer Almendrales
      */
@@ -88,7 +88,7 @@ class UserController extends Controller
     /**
      * Update a user.
      *
-     * @param  Request $request
+     * @param  UpdateUserRequest $request
      * @param  int $id (user id)
      * @return JsonResponse
      * @author Luifer Almendrales

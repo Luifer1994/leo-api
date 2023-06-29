@@ -8,7 +8,6 @@ use App\Http\Modules\Services\Models\Service;
 use App\Http\Modules\Services\Repositories\ServiceRepository;
 use App\Http\Modules\Services\Requests\CreateOrUpdateServiceRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class ServiceController extends Controller
@@ -32,7 +31,7 @@ class ServiceController extends Controller
             $limit    = $request->limit ?? 10;
             $search   = $request->search ?? '';
             $services = $this->serviceRepository->getAllServices($limit, $search);
-            return $this->successResponse($services, Response::HTTP_OK);
+            return $this->successResponse($services, 'Ok', Response::HTTP_OK);
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -49,7 +48,7 @@ class ServiceController extends Controller
         try {
             $search   = $request->search ?? '';
             $services = $this->serviceRepository->getAllServicesIsActive($search);
-            return $this->successResponse($services, Response::HTTP_OK);
+            return $this->successResponse($services, 'Ok', Response::HTTP_OK);
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -65,7 +64,7 @@ class ServiceController extends Controller
     {
         try {
             $service = $this->serviceRepository->findById($id);
-            return $this->successResponse($service, Response::HTTP_OK);
+            return $this->successResponse($service, 'Ok', Response::HTTP_OK);
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
