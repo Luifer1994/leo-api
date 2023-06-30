@@ -10,6 +10,7 @@ use App\Http\Modules\Invoices\Repositories\InvoiceLineSupplyRepository;
 use App\Http\Modules\Invoices\Repositories\InvoiceRepository;
 use App\Http\Modules\Invoices\Requests\CreateOrUpdateInvoiceRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class InvoiceService
 {
@@ -25,6 +26,49 @@ class InvoiceService
     }
 
     /**
+     * Get all Invoices with pagination.
+     *
+     * @param int $limit
+     * @param string $search
+     * @return object
+     */
+    function getAllInvoices(int $limit, string $search): object
+    {
+        $results = $this->InvoiceRepository->getAllInvoices($limit, $search);
+
+        $results->getCollection()->map(function ($invoice) {
+            $invoice->total = 0;
+            $invoice->total_supplies = 0;
+            $invoice->total_services = 0;
+
+            foreach ($invoice->InvoiceLines as $invoiceLine) {
+                $invoiceLine->subtotal  =  $invoiceLine->quantity * $invoiceLine->price;
+                $invoiceLine->total_tax =  $invoiceLine->subtotal * ($invoiceLine->percentage_tax / 100);
+                $invoiceLine->total     =  $invoiceLine->subtotal + $invoiceLine->total_tax;
+                $invoice->total         += $invoiceLine->total;
+                $invoice->total_services += $invoiceLine->total - $invoiceLine->total_tax;
+
+                foreach ($invoiceLine->InvoiceLineSupplies as $supply) {
+                    $supply->subtotal        =  $supply->quantity * $supply->price;
+                    $supply->total_tax       =  $supply->subtotal * ($supply->percentage_tax / 100);
+                    $supply->total           =  $supply->subtotal + $supply->total_tax;
+                    $invoice->total          += $supply->total;
+                    $invoiceLine->subtotal   += $supply->subtotal;
+                    $invoiceLine->total_tax  += $supply->total_tax;
+                    $invoiceLine->total      += $supply->total;
+                    $invoice->total_supplies += $supply->total - $supply->total_tax;
+                }
+            }
+
+            $invoice->subtotal = $invoice->InvoiceLines->sum('subtotal');
+            $invoice->total_tax = $invoice->InvoiceLines->sum('total_tax');
+            return $invoice;
+        });
+
+        return $results;
+    }
+
+    /**
      * Create new invoices.
      *
      * @param CreateOrUpdateInvoiceRequest $request
@@ -36,9 +80,10 @@ class InvoiceService
             DB::beginTransaction();
 
             $requestData = [
-                'code' => $this->InvoiceRepository->createUniqueCode(),
+                'code' => $this->createUniqueCode(),
                 'user_id' => auth()->user()->id,
                 'client_id' => $request->client_id,
+                'state' => $request->state,
             ];
 
             $invoice = $this->InvoiceRepository->save(new Invoice($requestData));
@@ -75,6 +120,21 @@ class InvoiceService
                 'data' => null
             ];
         }
+    }
 
+    /**
+     * Create unique code.
+     *
+     * @return string
+     */
+    public function createUniqueCode(): string
+    {
+        $code = Str::upper(Str::random(8));
+        $codeExist = $this->InvoiceRepository->getInvoiceByCode($code);
+
+        if ($codeExist)
+            return $this->createUniqueCode();
+
+        return $code;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Modules\Invoices\Models;
 
+use App\Http\Modules\Clients\Models\Client;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,38 +31,72 @@ class Invoice extends Model implements AuditableContract
 
     protected $table = 'invoices';
 
-	protected $casts = [
-		'client_id' => 'int',
+    protected $casts = [
+        'client_id' => 'int',
         'user_id' => 'int'
-	];
+    ];
 
-	protected $fillable = [
-		'code',
-		'state',
-		'observation',
-		'client_id',
-		'user_id'
-	];
+    protected $fillable = [
+        'code',
+        'state',
+        'observation',
+        'client_id',
+        'user_id'
+    ];
+
+
+    /**
+     * Get state attribute.
+     *
+     * @param string $value
+     * @return string
+     */
+    public function getStateAttribute(string $value)
+    {
+            switch ($value) {
+                case 'draft':
+                    return 'Borrador';
+                    break;
+                case 'paid':
+                    return 'Pagada';
+                    break;
+                case 'canceled':
+                    return 'Cancelada';
+                    break;
+                case 'pending':
+                    return 'Pendiente';
+                    break;
+                default:
+                    return 'Borrador';
+                    break;
+            }
+    }
+
+    //formatea la fecha de creacion de la factura a español
+    public function getCreatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('Y-m-d');
+    }
 
     /**
      * Relation with Cliet.
      *
      * @return BelongsTo
      */
-	public function Client():BelongsTo
-	{
-		return $this->belongsTo(Client::class);
-	}
+    public function Client(): BelongsTo
+    {
+        return $this->belongsTo(Client::class);
+    }
 
     /**
      * Relation with Cliet.
      *
      * @return HasMany
      */
-	public function InvoiceLines():HasMany
-	{
-		return $this->hasMany(InvoiceLine::class);
-	}
+    public function InvoiceLines(): HasMany
+    {
+        return $this->hasMany(InvoiceLine::class);
+    }
 
     /**
      * Relation to user.
@@ -70,8 +105,8 @@ class Invoice extends Model implements AuditableContract
      *
      * @return BelongsTo
      */
-    public function User():BelongsTo
-	{
-		return $this->belongsTo(User::class);
-	}
+    public function User(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

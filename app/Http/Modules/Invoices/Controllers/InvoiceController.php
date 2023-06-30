@@ -34,7 +34,7 @@ class InvoiceController extends Controller
         try {
             $limit    = $request->limit ?? 10;
             $search   = $request->search ?? '';
-            $data = $this->InvoiceRepository->getAllInvoices($limit, $search);
+            $data = $this->InvoiceService->getAllInvoices($limit, $search);
 
             return $this->successResponse($data, 'Facturas listadas com éxito');
         } catch (\Throwable $th) {
