@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\Modules\Invoices\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +14,7 @@ use \OwenIt\Auditing\Auditable;
  * @property int $id
  * @property string $description
  * @property float $price
- * @property float $percentage
+ * @property float $percentage_tax
  * @property int $quantity
  * @property int $invoice_line_id
  * @property Carbon|null $created_at
@@ -30,7 +30,7 @@ class InvoiceLineSupply extends Model implements AuditableContract
 
 	protected $casts = [
 		'price' => 'float',
-		'percentage' => 'float',
+		'percentage_tax' => 'float',
 		'quantity' => 'int',
 		'invoice_line_id' => 'int'
 	];
@@ -38,7 +38,7 @@ class InvoiceLineSupply extends Model implements AuditableContract
 	protected $fillable = [
 		'description',
 		'price',
-		'percentage',
+		'percentage_tax',
 		'quantity',
 		'invoice_line_id'
 	];

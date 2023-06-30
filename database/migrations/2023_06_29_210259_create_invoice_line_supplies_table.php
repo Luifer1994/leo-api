@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('description')->comment('Name or description to supply');
             $table->float('price', 12, 2)->comment('Pirce to service');
-            $table->float('percentage', 2, 2)->comment('Porcentage to tax IVA');
+            $table->float('percentage_tax', 4, 2)->comment('Porcentage to tax IVA');
             $table->integer('quantity')->comment('Quantity to service invoice');
             $table->foreignId('invoice_line_id')->constrained('invoice_lines')->comment('Relation to invoice lines table');
             $table->timestamps();

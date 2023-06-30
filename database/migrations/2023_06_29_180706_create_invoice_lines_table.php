@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('invoice_lines', function (Blueprint $table) {
             $table->id();
             $table->float('price', 12, 2)->comment('Pirce to service');
-            $table->float('percentage', 2, 2)->comment('Porcentage to tax IVA');
+            $table->float('percentage_tax', 4, 2)->comment('Porcentage to tax IVA');
             $table->integer('quantity')->comment('Quantity to service invoice');
             $table->foreignId('invoice_id')->constrained('invoices')->comment('Relation with invoices table');
             $table->foreignId('service_id')->constrained('services')->comment('Relation with services table');
